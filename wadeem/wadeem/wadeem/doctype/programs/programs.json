@@ -1,0 +1,117 @@
+{
+ "actions": [],
+ "allow_guest_to_view": 1,
+ "creation": "2020-11-18 17:49:55.112556",
+ "doctype": "DocType",
+ "editable_grid": 1,
+ "engine": "InnoDB",
+ "field_order": [
+  "program_id",
+  "program_name",
+  "prog_desc",
+  "program_includes",
+  "program_topics",
+  "misc_expenses",
+  "box_id",
+  "image",
+  "workshop_id",
+  "route",
+  "show_in_website",
+  "title"
+ ],
+ "fields": [
+  {
+   "fieldname": "program_id",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "Program ID",
+   "reqd": 1
+  },
+  {
+   "fieldname": "program_name",
+   "fieldtype": "Data",
+   "label": "Program Name"
+  },
+  {
+   "fieldname": "misc_expenses",
+   "fieldtype": "Currency",
+   "label": "Misc Expenses"
+  },
+  {
+   "fieldname": "box_id",
+   "fieldtype": "Link",
+   "label": "Box ",
+   "options": "Box"
+  },
+  {
+   "fieldname": "program_includes",
+   "fieldtype": "Small Text",
+   "label": "Program Includes"
+  },
+  {
+   "fieldname": "program_topics",
+   "fieldtype": "Long Text",
+   "label": "Program Topics"
+  },
+  {
+   "fieldname": "image",
+   "fieldtype": "Attach Image",
+   "label": "Image"
+  },
+  {
+   "columns": 3,
+   "fieldname": "workshop_id",
+   "fieldtype": "Table",
+   "label": "Workshop",
+   "options": "Workshop Programs",
+   "print_width": "100px"
+  },
+  {
+   "fieldname": "route",
+   "fieldtype": "Data",
+   "label": "Route",
+   "unique": 1
+  },
+  {
+   "fieldname": "prog_desc",
+   "fieldtype": "Small Text",
+   "label": "Program description"
+  },
+  {
+   "default": "0",
+   "fieldname": "show_in_website",
+   "fieldtype": "Check",
+   "label": "Show in Website"
+  },
+  {
+   "fieldname": "title",
+   "fieldtype": "Data",
+   "label": "Title"
+  }
+ ],
+ "has_web_view": 1,
+ "links": [],
+ "modified": "2020-12-22 14:48:08.039849",
+ "modified_by": "Administrator",
+ "module": "Wadeem",
+ "name": "Programs",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "System Manager",
+   "share": 1,
+   "write": 1
+  }
+ ],
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "title_field": "program_name",
+ "track_changes": 1
+}

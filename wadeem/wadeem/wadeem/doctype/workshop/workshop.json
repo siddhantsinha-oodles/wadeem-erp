@@ -1,0 +1,70 @@
+{
+ "actions": [],
+ "autoname": "naming_series:",
+ "creation": "2020-12-22 18:33:47.809169",
+ "doctype": "DocType",
+ "editable_grid": 1,
+ "engine": "InnoDB",
+ "field_order": [
+  "naming_series",
+  "workshop_name",
+  "teacher",
+  "start_date",
+  "end_date"
+ ],
+ "fields": [
+  {
+   "fieldname": "naming_series",
+   "fieldtype": "Select",
+   "label": "Workshop ID",
+   "no_copy": 1,
+   "options": "WO-",
+   "set_only_once": 1
+  },
+  {
+   "fieldname": "workshop_name",
+   "fieldtype": "Data",
+   "label": "Workshop Name"
+  },
+  {
+   "fieldname": "start_date",
+   "fieldtype": "Date",
+   "label": "Start Date"
+  },
+  {
+   "fieldname": "end_date",
+   "fieldtype": "Date",
+   "label": "End Date"
+  },
+  {
+   "fieldname": "teacher",
+   "fieldtype": "Link",
+   "label": "Teacher",
+   "options": "Teacher"
+  }
+ ],
+ "index_web_pages_for_search": 1,
+ "links": [],
+ "modified": "2020-12-23 10:54:43.737161",
+ "modified_by": "Administrator",
+ "module": "Wadeem",
+ "name": "Workshop",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "System Manager",
+   "share": 1,
+   "write": 1
+  }
+ ],
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "track_changes": 1
+}

@@ -1,0 +1,76 @@
+{% extends "templates/web.html" %}
+
+{% block title %}{{ _('Program List') }}{% endblock %}
+{% block header %}
+<h1>{{ _('Program List') }}</h1>
+{% endblock header %}
+
+{% block page_content %}
+<div class="row">
+    <div class="col-8">
+        <div class="input-group input-group-sm mb-3">
+            <input type="search" class="form-control" placeholder="{{_('Search')}}"
+                   aria-label="{{_('Program Search')}}" aria-describedby="program-search"
+                   value="Test"
+            >
+        </div>
+    </div>
+
+</div>
+
+<div class="row">
+    <div class="col-12 order-2 col-md-8 order-md-1 programs">
+        {% if all_programs %}
+        {% for program in all_programs %}
+        <div class="card mb-3">
+            <div class="row no-gutters">
+                <div class="col-md-3">
+                    <div class="card-body">
+                        <a class="no-underline" href="/programs/{{ program.program_name }}">
+                            <img class="website-image"
+                                 src="{{ program.image}}"
+                                 alt="{{ program.program_name }}">
+                        </a>
+                    </div>
+                </div>
+                <div class="col-md-9">
+                    <div class="card-body">
+                        <h5 class="card-title">
+                            <a class="text-dark" href="/programs/{{ program.program_name }}">
+                                {{  program.program_name}}
+                            </a>
+                        </h5>
+                        <p class="card-text">Program Description:
+                            {{ program.prog_desc or '<i class="text-muted">No
+                            description</i>' }}
+                        </p>
+                        <p class="card-text">Program Includes:
+                            {{ program.program_includes or '<i class="text-muted">No
+                            description</i>' }}
+                        </p>
+                        <p class="card-text">Program Topics:
+                            {{ program.program_topics or '<i class="text-muted">No
+                            description</i>' }}
+                        </p>
+                        <p class="card-text">
+                            Workshop Name:
+                        </p>
+                        <p class="card-text">
+                            Workshop Time : 12:00 AM
+                        </p>
+                        <p class="card-text">
+                            Workshop Date : 12-12-2020
+                        </p>
+                        <a href="/programs/{{ program.program_name }}" class="btn btn-sm btn-light">{{ _('More details') }}</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+        {% else %}
+        <div class="d-flex justify-content-center p-3 text-muted">{{ _('No Program found') }}</div>
+        {% endif %}
+    </div>
+</div>
+
+{% endblock %}

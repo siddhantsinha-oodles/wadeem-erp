@@ -1,0 +1,82 @@
+<div class="form-group">
+    <img src="{{ doc.image }}" alt="No Image">
+    <a id="title" data-value={{doc.title}} href="{{ doc.route }}"> Program: {{ doc.title or doc.name }}</a>
+
+    <p>Program-{{ doc.prog_desc }} </p>
+    <p>Program includes-{{ doc.program_includes }} </p>
+    <p>topics-{{ doc.program_topics }} </p>
+    {% set children = frappe.get_all('Children', filters={'owner': frappe.session.user}, fields=['full_name']) %}
+    <div>
+        <label for="children">Choose a child:</label>
+        <select name="children" id="children" data-fieldtype="Select">
+            {% for child in children %}
+            <option value="{{ child.full_name }}">{{ child.full_name }}</option>
+            {% endfor %}
+        </select>
+    </div>
+    <div>
+        <p>Workshops</p>
+        {% for workshop in doc.workshop_id %}
+        {% set workshop_doc = workshop.get_records(workshop.workshop_id) %}
+        {% set program_name = doc.program_name %}
+
+        Workshop dates:{{ workshop_doc.start_date}} - {{ workshop_doc.end_date}}
+        <input type="checkbox" class="workspace_name" id="{{ workshop_doc.workshop_name }}" value="{{ workshop_doc.workshop_name }}">
+        <label for="{{ workshop_doc.workshop_name }}"> {{ workshop_doc.workshop_name }}</label><br>
+        {% endfor %}
+    </div>
+
+    <button type="Submit" id="enroll_child" class="btn btn-primary">
+        Enroll
+    </button>
+
+    <script>
+	frappe.ready(() => {
+		$('#enroll_child').click((event) => {
+			const $btn = $(event.target);
+            const $btn_ = $("#children").val();
+             const selected_workspaces = [];
+             debugger
+    const list = $(".workspace_name");
+    for (let index = 0; index < list.length; index++) {
+      const element = list[index];
+      if(element["checked"]) {
+        selected_workspaces.push(element["id"]);
+      }
+    }
+     console.log()
+     debugger
+    console.log(selected_workspaces);
+    const query_params = {
+       program:  $("#title").data('value'),
+      children: $("#children").val(),
+      selected_workspaces
+
+    };
+    let path = window.location.pathname + '?' + frappe.utils.get_url_from_dict(query_params);
+    frappe.call({
+        method: 'wadeem.wadeem.doctype.enroll_children.enroll_children.create_form',
+        args: query_params
+        }).then(res => {
+            console.log(res.message.name)
+            let success_dialog = new frappe.ui.Dialog({
+				title: __('Success'),
+				secondary_action: function() {
+					window.location.reload()
+				}
+			})
+			success_dialog.set_message(__('You have successfully enrolled for the program '));
+			success_dialog.$message.show()
+			success_dialog.show();
+			const origin = window.location.origin
+			const redirect_path = origin + '/' + 'enroll' + '?' + res.message.name
+			console.log(redirect_path)
+            window.location.replace(redirect_path);
+       })
+		});
+	});
+
+    </script>
+
+</div>
+<!-- this is a sample default list template -->
