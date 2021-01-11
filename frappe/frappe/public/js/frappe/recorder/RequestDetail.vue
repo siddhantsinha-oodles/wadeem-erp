@@ -14,7 +14,7 @@
 				</div>
 			</div>
 		</div>
-		<div class="row form-section visible-section">
+		<div class="row form-section visible-section 456">
 			<div class="col-sm-10">
 				<h6 class="form-section-heading uppercase">SQL Queries</h6>
 			</div>
@@ -92,7 +92,7 @@
 														<div class="form-area">
 															<div class="form-layout">
 																<div class="form-page">
-																	<div class="row form-section visible-section">
+																	<div class="row request-detail form-section visible-section">
 																		<div class="section-body">
 																			<div class="form-column col-sm-12">
 																				<form>

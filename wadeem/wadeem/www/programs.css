@@ -1,236 +1,4 @@
-<div class="content-slider-wrapper">
-    <div class="event-slider">
-                     <div class="">
-                        <div class="columns">
-                           <!-- column -->
-                           <div class="column">
-                              <figure style="border-radius: 35px; overflow: hidden; ">
-                <img src="{{ doc.image }}" alt="No Image">
-                              </figure>
-                           </div>
-                        </div>
-                     </div>
-                  </div>
-
-    <div class="right-slider-text right-contact-form has-text-left">
-                   <h2 class="has-text-right fs-32" style="text-transform:capitalize;">{{ doc.program_name }}</h2>
-                   <div class="has-text-right">
-<!--                     <div class="workshop-price price-block">-->
-<!--                        <span>3000 SAR <strong class="dollar" style="background:none">-->
-<!--                           <img src="assets/images/clock_vector.svg" alt="clock"></strong></span>-->
-<!--                        <span>3000 SAR <strong class="dollar" style="background:none"><img src="assets/images/dollar_vector.svg" alt="clock"></strong></span>-->
-<!--                     </div>-->
-<!--                     <h2 class="kids-heading">تشمل الورشة:</h2>-->
-<!--                     <p class="kids-para">اشتراك الطفل بفصول افتراضية والتفاعل مع المدربة والأصدقاء صندوق أدوات: يحتوي على الأدوات التي يحتاجها الطفل للقيام بالأنشطة الخاصة بالورشة. </p>-->
-
-                     <h2 class="kids-heading">Program Includes</h2>
-                     <div class="workship-menu educator-price kids-menu">
-                        <div class="kids-para custom-text-right">{{ doc.program_includes }}</div>
-                     </div>
-                       <h2 class="kids-heading">Program Topics</h2>
-                     <div class="workship-menu educator-price kids-menu">
-                        <div class="kids-para custom-text-right">{{ doc.program_topics }}</div>
-                     </div>
-                    </div>
-         <div class="row-element flex-wrap" style="margin:0 -15px;">
-             <label class="d-block w-100"> Select a child: </label>
-                        <div class="contacts-inputs-common">
-                            {% set children = frappe.get_all('Children', filters={'owner': frappe.session.user}, fields=['full_name','name']) %}
-                        <div class="custom-select" style="border:none; background:none;">
-                           <select name="children" id="children" data-fieldtype="Select">
-                             {% for child in children %}
-                                <option value="{{ child.name }}">{{ child.full_name }}</option>
-                            {% endfor %}
-                           </select>
-                         </div>
-                      </div>
-                      </div>
-                   <div class=" bordered-payments" style="display: block; width:auto; margin-top:30px;">
-               <div>
-                    <p class="text-right">Workshop Date Select</p>
-                    {% for workshop in doc.workshop_id %}
-                    {% set workshop_doc = workshop.get_records(workshop.workshop_id) %}
-                    {% set program_name = doc.program_name %}
-
-                  <label for="{{ workshop_doc.name }}" class="label-radios pay-radios">{{ workshop_doc.start_date}} - {{ workshop_doc.end_date}}
-                  <input type="radio" name="radio" id="{{ workshop_doc.name }}" value="{{ workshop_doc.name }}">
-                  <span class="checkmark"></span>
-                </label>
-                   {% endfor %}
-               </div>
-
-            </div>
-                  <form class="check-form">
-                       <div class="general-btn">
-                          <button id="enroll_child" class="btn red-btn pink-btn">Purchase</button>
-                           <a href="checkout-form.html" class="btn red-btn ">تابع لإتمام الدفع</a>
-                        </div>
-                  </form>
-                  </div>
-</div>
-
-{% block script %}
-
-    <script>
-	frappe.ready(() => {
-		$('#enroll_child').click((event) => {
-		    debugger
-			const $btn = $(event.target);
-            const $btn_ = $("#children").val();
-             const selected_workspaces = [];
-    const list = $(".workspace_name");
-    for (let index = 0; index < list.length; index++) {
-      const element = list[index];
-      if(element["checked"]) {
-        selected_workspaces.push(element["id"]);
-      }
-    }
-
-    console.log(selected_workspaces);
-    const query_params = {
-       program:  $("#title").data('value'),
-      children: $("#children").val(),
-      selected_workspaces
-
-    };
-    let path = window.location.pathname + '?' + frappe.utils.get_url_from_dict(query_params);
-    frappe.call({
-        method: 'wadeem.wadeem.doctype.enroll_children.enroll_children.create_form',
-        args: query_params
-        }).then(res => {
-            console.log(res.message.name)
-            let success_dialog = new frappe.ui.Dialog({
-				title: __('Success'),
-				secondary_action: function() {
-					window.location.reload()
-				}
-			})
-			success_dialog.set_message(__('Do not refresh. Please complete the payment on the next page'));
-			success_dialog.$message.show()
-			success_dialog.show();
-			const origin = window.location.origin
-			const redirect_path = origin + '/' + 'enroll' + '?name=' + res.message.name
-			console.log(redirect_path)
-            window.location.replace(redirect_path);
-       })
-		});
-	});
-
-    </script>
-<script>
-	$(document).ready(function() {
-  $("body").click(function() {
-    $(".click-user").removeClass("active-header");
-
-});
-//navbar
-	$(".navbar-burger").click(function(){
-		$(".navbar-burger").toggleClass("is-active");
-		$("#navbar-list").toggle();
-  });
-
-  $(".user-account").click(function(event){
-    $(".click-user").toggleClass("active-header");
-    event.stopPropagation();
-  });
-  $(".click-user").click(function(event){
-    event.stopPropagation();
-  });
-
-$(window).on("scroll", function() {
-  if($(window).scrollTop() > 50) {
-      $(".navbar").addClass("bg-color");
-  } else {
-      //remove the background property so it comes transparent again (defined in your css)
-     $(".navbar").removeClass("bg-color");
-  }
-});
-});
-</script>
-
-   <script>
-var x, i, j, l, ll, selElmnt, a, b, c;
-/*look for any elements with the class "custom-select":*/
-x = document.getElementsByClassName("custom-select");
-l = x.length;
-for (i = 0; i < l; i++) {
-  selElmnt = x[i].getElementsByTagName("select")[0];
-  ll = selElmnt.length;
-  /*for each element, create a new DIV that will act as the selected item:*/
-  a = document.createElement("DIV");
-  a.setAttribute("class", "select-selected");
-  a.innerHTML = selElmnt.options[selElmnt.selectedIndex].innerHTML;
-  x[i].appendChild(a);
-  /*for each element, create a new DIV that will contain the option list:*/
-  b = document.createElement("DIV");
-  b.setAttribute("class", "select-items select-hide");
-  for (j = 1; j < ll; j++) {
-    /*for each option in the original select element,
-    create a new DIV that will act as an option item:*/
-    c = document.createElement("DIV");
-    c.innerHTML = selElmnt.options[j].innerHTML;
-    c.addEventListener("click", function(e) {
-        /*when an item is clicked, update the original select box,
-        and the selected item:*/
-        var y, i, k, s, h, sl, yl;
-        s = this.parentNode.parentNode.getElementsByTagName("select")[0];
-        sl = s.length;
-        h = this.parentNode.previousSibling;
-        for (i = 0; i < sl; i++) {
-          if (s.options[i].innerHTML == this.innerHTML) {
-            s.selectedIndex = i;
-            h.innerHTML = this.innerHTML;
-            y = this.parentNode.getElementsByClassName("same-as-selected");
-            yl = y.length;
-            for (k = 0; k < yl; k++) {
-              y[k].removeAttribute("class");
-            }
-            this.setAttribute("class", "same-as-selected");
-            break;
-          }
-        }
-        h.click();
-    });
-    b.appendChild(c);
-  }
-  x[i].appendChild(b);
-  a.addEventListener("click", function(e) {
-      /*when the select box is clicked, close any other select boxes,
-      and open/close the current select box:*/
-      e.stopPropagation();
-      closeAllSelect(this);
-      this.nextSibling.classList.toggle("select-hide");
-      this.classList.toggle("select-arrow-active");
-    });
-}
-function closeAllSelect(elmnt) {
-  /*a function that will close all select boxes in the document,
-  except the current select box:*/
-  var x, y, i, xl, yl, arrNo = [];
-  x = document.getElementsByClassName("select-items");
-  y = document.getElementsByClassName("select-selected");
-  xl = x.length;
-  yl = y.length;
-  for (i = 0; i < yl; i++) {
-    if (elmnt == y[i]) {
-      arrNo.push(i)
-    } else {
-      y[i].classList.remove("select-arrow-active");
-    }
-  }
-  for (i = 0; i < xl; i++) {
-    if (arrNo.indexOf(i)) {
-      x[i].classList.add("select-hide");
-    }
-  }
-}
-document.addEventListener("click", closeAllSelect);
-</script>
-{% endblock %}
-
-{% block style %}
- <style>
-        .sidebar-column.col-sm-2{
+.sidebar-column.col-sm-2{
     display:none;
 }
 
@@ -550,9 +318,9 @@ select:focus, input:focus {
 .btn{
 	font-size: 1.6rem;
 	color: #fff;
-	border-radius: 15px;
+	border-radius: 15px; 
 	font-family: 'Almarai', sans-serif;
-	font-weight: 500;
+	font-weight: 500;	
 	padding: 3px 15px;
 	font-size: 1.6rem;
 	transition: all 0.5s ease-in-out;
@@ -583,7 +351,7 @@ select:focus, input:focus {
 }
 .web-footer{
     display:none;
-
+    
 }
 .navbar.is-fixed-top{
 	z-index: 99;
@@ -770,12 +538,12 @@ footer p{
 	-ms-user-select: none;
 	user-select: none;
 	border-radius:4px
-
+	
   }
   .btn-checkbox-wrapper{
-	padding-left: 0px;
+	padding-left: 0px; 
   }
-
+  
   /* Hide the browser's default checkbox */
   .checkbox-wrapper input {
 	position: absolute;
@@ -784,7 +552,7 @@ footer p{
 	height: 0;
 	width: 0;
   }
-
+  
   /* Create a custom checkbox */
   .checkmark-main {
 		position: absolute;
@@ -795,29 +563,29 @@ footer p{
 	  width: 17.97px;
 	  background-color: #eee;
   }
-
+  
   /* On mouse-over, add a grey background color */
   .checkbox-wrapper:hover input ~ .checkmark-main {
 	background-color: #ccc;
   }
-
+  
   /* When the checkbox is checked, add a blue background */
   .checkbox-wrapper input:checked ~ .checkmark-main {
 	background-color: #E579AE;
   }
-
+  
   /* Create the checkmark/indicator (hidden when not checked) */
   .checkmark-main:after {
 	content: "";
 	position: absolute;
 	display: none;
   }
-
+  
   /* Show the checkmark when checked */
   .checkbox-wrapper input:checked ~ .checkmark-main:after {
 	display: block;
   }
-
+  
   /* Style the checkmark/indicator */
   .checkbox-wrapper .checkmark-main:after {
 	left: 6px;
@@ -835,7 +603,7 @@ footer p{
 	-webkit-appearance: none;
 	-moz-appearance: none;
 	appearance: none;
-	/* Some browsers will not display the caret when using calc, so we put the fallback first */
+	/* Some browsers will not display the caret when using calc, so we put the fallback first */ 
 	background: url("http://cdn1.iconfinder.com/data/icons/cc_mono_icon_set/blacks/16x16/br_down.png") white no-repeat 98.5% !important; /* !important used for overriding all other customisations */
 	background: url("http://cdn1.iconfinder.com/data/icons/cc_mono_icon_set/blacks/16x16/br_down.png") white no-repeat calc(100% - 10px) !important; /* Better placement regardless of input width */
   }
@@ -846,24 +614,23 @@ footer p{
 	position: relative;
 	font-family: Arial;
   }
-
+  
   .custom-select select {
 	display: none; /*hide original SELECT element:*/
   }
-
+  
   .select-selected {
 	color: #23557d !important;
 	padding-top:10px !important ;
 	background-color: #FAFCFF;
-	font-size:13px;
   }
-
+  
   /*style the arrow inside the select element:*/
   .select-selected:after {
 	position: absolute;
     content: "";
-    top: 15px;
-    right: 32px;
+    top: 10px;
+    right: 19px;
     width: 11.17px;
     height: 11.17px;
     border-right: 2px solid #BDCFF1;
@@ -872,14 +639,13 @@ footer p{
     border-left: 2px solid transparent;
     transform: rotate(45deg);
   }
-
+  
   /*point the arrow upwards when the select box is open (active):*/
   .select-selected.select-arrow-active:after {
-	top: 20px;
+	top: 15px;
     transform: rotate(-136deg);
-
   }
-
+  
   /*style the items (options), including the selected item:*/
   .select-items div,.select-selected {
 	color: #23557d !important;
@@ -896,23 +662,23 @@ footer p{
   .select-items {
 	position: absolute;
 	background-color: #FAFCFF;
-	bottom: -177px;
+	top: 100%;
 	left: 0;
 	right: 0;
 	z-index: 99;
 	border: 1px solid #BDCFF1;
     border-radius: 15px;
   }
-
+  
   /*hide the items when the select box is closed:*/
   .select-hide {
 	display: none;
   }
-
+  
   .select-items div:hover, .same-as-selected {
 	background-color: rgba(0, 0, 0, 0.1);
   }
-
+  
 .content-wrap {
 	padding: 98px 0 0;
 }
@@ -1273,8 +1039,17 @@ footer p{
 	margin-bottom: 0px;
 	font-size: 14px;
 	font-weight: 400;
+	min-height:35.6px;
 	margin-right: 16px;
 	color: rgba(27, 51, 95, 0.7)
+}
+
+.price-block .card-block p.para-description{
+    display: -webkit-box !important;
+-webkit-line-clamp: 2;
+-webkit-box-orient: vertical;
+overflow: hidden;
+text-overflow: ellipsis;
 }
 
 .price-block .card-block ul li {
@@ -1554,7 +1329,6 @@ footer p{
 .general-btn .btn {
 	display: block;
 	margin-bottom: 10px;
-	width:100%
 }
 
 .general-btn .btn:last-child {
@@ -1681,6 +1455,7 @@ footer p{
 
 .workshop-price .dollar {
 	background: #24CBEA;
+	margin-left:5px;
 	width: 20px;
 	height: 20px;
 	border-radius: 50%;
@@ -1714,9 +1489,7 @@ footer p{
 	width: 100%;
 }
 
-.one-day-wrapper .card-block:hover img {
-	transform: scaleY(1.2);
-}
+
 
 .common-online {
 	display: flex !important;
@@ -1744,7 +1517,7 @@ footer p{
 	border-radius: 32px;
 	border-radius: 16px;
 	max-width: 1056px !important;
-	margin: 40px 0 20px auto !important;
+	margin: 0 0 20px auto !important;
 }
 
 .active-header {
@@ -1984,7 +1757,7 @@ td {
 .btn-padding{
 padding:11px 15px !important;
 border-radius: 55px;
-margin-bottom:20px !important;
+margin-bottom:0px !important;
 }
 
 .input-search {
@@ -2006,18 +1779,10 @@ font-size:27px;
 .common-workshops{
 margin-bottom:30px !important;
 }
-h1{
-display:none;
-}
 
-.custom-text-right > div {
-    white-space:normal !important;
-    text-align:right;
-}
+.common-workshops-wrapper .common-workshops{
+width:100%;}
 
-.result {
-    border-bottom: none;
-}
 @media only screen and (min-width: 575px) {
   .check-out-tabbing li {
     margin-bottom: 0;
@@ -2119,7 +1884,8 @@ display:none;
   .common-workshops-wrapper .common-workshops {
     width: 32.5%;
   }
-
+.price-block .card-block{
+padding:32px 15px;}
   /* about-us page */
   .meaning-content {
     width: 70%;
@@ -2196,7 +1962,7 @@ display:none;
   font-size:10.6px
 }
 
-
+  
   .circle-section-wrapper .common-text-circle strong{
   display:block;
   text-align: center;
@@ -2207,7 +1973,7 @@ display:none;
     display:block;
     text-align: center;
   }
-
+ 
   .know-menu li {
     padding: 25px 30px;
     display: flex;
@@ -2340,7 +2106,7 @@ margin-bottom:20px !important;
   .navbar .is-fixed-top {
     display: flex;
   }
-.navbar-brand{
+.navbar-brand{ 
     width:auto;
 }
   .slick-dots {
@@ -2577,7 +2343,7 @@ margin-bottom:20px !important;
 
   .right-slider-text p {
     color: #5c5c5c;
-    margin-bottom: 20px;
+    margin-bottom: 64px;
     font-size: 24px;
   }
 
@@ -2667,7 +2433,7 @@ margin-bottom:20px !important;
    .circle-section-wrapper .right-text {
     right: 14%;
     top: 44%;
-}
+} 
 .circle-section-wrapper .left-text {
   left: 14.3%;
   top: 21%;
@@ -2812,7 +2578,7 @@ font-size:10.6px
 
   .general-btn,
   .common-form-btn {
-    text-align: right;
+    text-align: left;
     margin-top: 47px;
   }
 
@@ -2820,7 +2586,6 @@ font-size:10.6px
     display: inline-block;
     margin-right: 20px;
     margin-bottom: 0px;
-    width:auto;
   }
 
   .general-btn .btn:last-child {
@@ -2833,16 +2598,9 @@ font-size:10.6px
   }
 
   .select-selected {
-    font-size: 17px !important;
-    padding-top: 12px !important;
+    padding-top: 18px !important;
   }
-.select-items div{
-font-size:14px;
-}
 
-.select-items{
-bottom:100%;
-}
   .supscription-check-wrapper p {
     color: #1b335f;
     font-size: 16px;
@@ -2903,7 +2661,8 @@ bottom:100%;
   }
 
   .common-workshops-wrapper {
-    width: 98%;
+    width: 93.7%;
+    margin:0 auto !important;
   }
 
   .online-section .slick-prev {
@@ -3082,11 +2841,6 @@ bottom:100%;
     font-size: 48px;
   }
   .btn-padding{
-margin-bottom:30px !important;
+margin-bottom:0px !important;
 }
 }
-
-    </style>
-{% endblock %}
-
-

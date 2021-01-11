@@ -4,7 +4,7 @@
 {% block content %}
 
 {% macro main_content() %}
-<div class="page-content-wrapper">
+<div class="page-content-wrapper about-banner">
 	<!-- breadcrumbs -->
 	<div class="page-breadcrumbs">
 		{% block breadcrumbs %}
@@ -13,9 +13,9 @@
 	</div>
 
 	{% block page_container %}
-	<main class="{% if not full_width %}container my-4{% endif %}">
+	<main class="{% if not full_width %}container{% endif %}" style="max-width:1300px;">
 		<div class="d-flex justify-content-between align-items-center">
-			<div class="page-header">
+			<div class="page-header w-100">
 				{% block header %}{% endblock %}
 			</div>
 
@@ -59,7 +59,7 @@ id="page-{{ name or route | e }}" data-path="{{ pathname | e }}"
 		{%- if not sidebar_right -%}
 		{{ sidebar() }}
 		{%- endif -%}
-		<div class="main-column col-sm-{{ 12 - columns }}">
+		<div class="main-column ">
 			{{ main_content() }}
 		</div>
 		{%- if sidebar_right -%}
@@ -74,3 +74,38 @@ id="page-{{ name or route | e }}" data-path="{{ pathname | e }}"
 {% endif %}
 
 {% endblock %}
+
+{% block script %}
+<script>
+	$(document).ready(function() {
+  $("body").click(function() {
+    $(".click-user").removeClass("active-header");
+
+});
+//navbar
+	$(".navbar-burger").click(function(){
+		$(".navbar-burger").toggleClass("is-active");
+		$("#navbar-list").toggle();
+  });
+
+  $(".user-account").click(function(event){
+    $(".click-user").toggleClass("active-header");
+    event.stopPropagation();
+  });
+  $(".click-user").click(function(event){
+    event.stopPropagation();
+  });
+
+$(window).on("scroll", function() {
+  if($(window).scrollTop() > 50) {
+      $(".navbar").addClass("bg-color");
+  } else {
+      //remove the background property so it comes transparent again (defined in your css)
+     $(".navbar").removeClass("bg-color");
+  }
+});
+});
+</script>
+{% endblock %}
+
+

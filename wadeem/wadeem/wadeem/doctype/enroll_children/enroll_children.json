@@ -1,33 +1,42 @@
 {
  "actions": [],
+ "autoname": "naming_series:",
  "creation": "2020-12-23 17:43:28.872249",
  "doctype": "DocType",
  "editable_grid": 1,
  "engine": "InnoDB",
  "field_order": [
+  "naming_series",
   "child_id",
   "program_id",
   "workshop_id",
-  "amended_from"
+  "amended_from",
+  "application_status"
  ],
  "fields": [
   {
    "fieldname": "child_id",
    "fieldtype": "Link",
+   "in_list_view": 1,
    "label": "Child",
-   "options": "Children"
+   "options": "Children",
+   "read_only": 1
   },
   {
    "fieldname": "program_id",
    "fieldtype": "Link",
+   "in_list_view": 1,
    "label": "Program",
-   "options": "Programs"
+   "options": "Programs",
+   "read_only": 1
   },
   {
+   "allow_in_quick_entry": 1,
    "fieldname": "workshop_id",
    "fieldtype": "Table",
    "label": "Workshop",
-   "options": "Enroll Workshops"
+   "options": "Enroll Workshops",
+   "read_only": 1
   },
   {
    "fieldname": "amended_from",
@@ -37,12 +46,31 @@
    "options": "Enroll Children",
    "print_hide": 1,
    "read_only": 1
+  },
+  {
+   "fieldname": "naming_series",
+   "fieldtype": "Select",
+   "in_global_search": 1,
+   "in_list_view": 1,
+   "in_standard_filter": 1,
+   "label": "Form ID",
+   "options": "EN-",
+   "search_index": 1,
+   "set_only_once": 1
+  },
+  {
+   "allow_on_submit": 1,
+   "default": "Not Enrolled",
+   "fieldname": "application_status",
+   "fieldtype": "Select",
+   "label": "Application Status",
+   "options": "Enrolled\nCompleted\nNot Enrolled"
   }
  ],
  "index_web_pages_for_search": 1,
  "is_submittable": 1,
  "links": [],
- "modified": "2020-12-24 10:39:08.780179",
+ "modified": "2020-12-29 11:00:29.854617",
  "modified_by": "Administrator",
  "module": "Wadeem",
  "name": "Enroll Children",

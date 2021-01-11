@@ -11,7 +11,9 @@ app_color = "blue"
 app_email = "siddhant.sinha@oodlestechnologies.com"
 app_license = "MIT"
 
-
+on_session_creation = [
+	"wadeem.wadeem.wadeem.utils.create_guardian"
+]
 website_route_rules = [
 	{"from_route": "/programs/<program_name>", "to_route": "Programs"}
 ]

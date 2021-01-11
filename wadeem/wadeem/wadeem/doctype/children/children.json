@@ -2,6 +2,7 @@
  "actions": [],
  "creation": "2020-12-23 10:24:52.701673",
  "doctype": "DocType",
+  "autoname": "field:full_name",
  "editable_grid": 1,
  "engine": "InnoDB",
  "field_order": [

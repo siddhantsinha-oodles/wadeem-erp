@@ -1,68 +1,66 @@
 {% extends "templates/web.html" %}
 
 {% block title %}{{ _('Program List') }}{% endblock %}
+
+{% block head_include %}
+<link rel="stylesheet" type="text/css" href="programs.css">
+{% endblock %}
+
 {% block header %}
-<h1>{{ _('Program List') }}</h1>
+
+<h1 class="our-workshop-heading text-center font-weight-bold" style="color:#23557d">{{ _('Programs') }}</h1>
 {% endblock header %}
 
 {% block page_content %}
 <div class="row">
-    <div class="col-8">
+    <div class="col-12 col-sm-12 col-md-6 common-workshops-wrapper">
         <div class="input-group input-group-sm mb-3">
-            <input type="search" class="form-control" placeholder="{{_('Search')}}"
+            <input type="search" class="form-control input-search" placeholder="{{_('Search')}}"
                    aria-label="{{_('Program Search')}}" aria-describedby="program-search"
-                   value="Test"
+                   value="{{ frappe.sanitize_html(frappe.form_dict.search) or '' }}"
             >
         </div>
     </div>
 
 </div>
 
-<div class="row">
-    <div class="col-12 order-2 col-md-8 order-md-1 programs">
+<div class="row price-block common-month-workshops common-workshops-wrapper" style="margin-right:0; margin-left:0;">
+    <div class="programs  main-program   columns common-online justify-content-between">
         {% if all_programs %}
         {% for program in all_programs %}
-        <div class="card mb-3">
-            <div class="row no-gutters">
-                <div class="col-md-3">
-                    <div class="card-body">
-                        <a class="no-underline" href="/programs/{{ program.program_name }}">
-                            <img class="website-image"
-                                 src="{{ program.image}}"
-                                 alt="{{ program.program_name }}">
-                        </a>
+        <div class=" common-workshops one-day-wrapper  has-text-centered">
+            <div class="card-block">
+                <div class="col-md-12 p-0">
+                    <div class="card-body p-0">
+                        <figure class="mb-0">
+                            <a class=" no-underline" href="/programs/{{ program.program_name }}">
+                                <img class="website-image"
+                                     src="{{ program.image}}"
+                                     alt="{{ program.program_name }}">
+                            </a>
+
+                        </figure>
                     </div>
                 </div>
-                <div class="col-md-9">
-                    <div class="card-body">
-                        <h5 class="card-title">
+                <div class="col-md-12">
+                    <div class="card-body  has-text-right">
+                        <div class=" pb-0 mb-0" style="box-shadow:none">
                             <a class="text-dark" href="/programs/{{ program.program_name }}">
-                                {{  program.program_name}}
+                                <h4>{{ program.program_name}}</h4>
                             </a>
-                        </h5>
-                        <p class="card-text">Program Description:
-                            {{ program.prog_desc or '<i class="text-muted">No
-                            description</i>' }}
-                        </p>
-                        <p class="card-text">Program Includes:
-                            {{ program.program_includes or '<i class="text-muted">No
-                            description</i>' }}
-                        </p>
-                        <p class="card-text">Program Topics:
-                            {{ program.program_topics or '<i class="text-muted">No
-                            description</i>' }}
-                        </p>
-                        <p class="card-text">
-                            Workshop Name:
-                        </p>
-                        <p class="card-text">
-                            Workshop Time : 12:00 AM
-                        </p>
-                        <p class="card-text">
-                            Workshop Date : 12-12-2020
-                        </p>
-                        <a href="/programs/{{ program.program_name }}" class="btn btn-sm btn-light">{{ _('More details') }}</a>
+                            <p class="line para-description">
+
+                                {{ program.prog_desc}}
+                            </p>
+                            <div class="workshop-price">
+                                 <span>
+                                {{  program.price}}<strong class="dollar">$</strong>
+                            </span>
+                            </div>
+                        </div>
                     </div>
+                    <a href="/programs/{{ program.program_name }}" class="btn btn-padding red-btn w-100">{{ _('More
+                                details') }}</a>
                 </div>
             </div>
         </div>

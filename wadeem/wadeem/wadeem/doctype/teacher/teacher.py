@@ -3,8 +3,12 @@
 # For license information, please see license.txt
 
 from __future__ import unicode_literals
-# import frappe
+import frappe
 from frappe.model.document import Document
 
 class Teacher(Document):
-	pass
+	def validate(self):
+		self.title = " ".join(filter(None, [self.first_name, self.middle_name, self.last_name]))
+
+	def get_full_name(self):
+		return self.first_name + self.middle_name + self.last_name
