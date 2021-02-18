@@ -1,0 +1,60 @@
+{
+ "actions": [],
+ "autoname": "naming_series:",
+ "creation": "2020-12-14 12:07:51.142430",
+ "doctype": "DocType",
+ "editable_grid": 1,
+ "engine": "InnoDB",
+ "field_order": [
+  "naming_series",
+  "date",
+  "start_time",
+  "end_time",
+  "zoom_link"
+ ],
+ "fields": [
+  {
+   "fieldname": "date",
+   "fieldtype": "Date",
+   "in_list_view": 1,
+   "label": "Date"
+  },
+  {
+   "fieldname": "start_time",
+   "fieldtype": "Time",
+   "in_list_view": 1,
+   "label": "Start Time"
+  },
+  {
+   "fieldname": "end_time",
+   "fieldtype": "Time",
+   "in_list_view": 1,
+   "label": "End Time"
+  },
+  {
+   "fieldname": "zoom_link",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "Zoom link"
+  },
+  {
+   "fieldname": "naming_series",
+   "fieldtype": "Select",
+   "label": "Session ID",
+   "options": "SES-",
+   "set_only_once": 1
+  }
+ ],
+ "index_web_pages_for_search": 1,
+ "istable": 1,
+ "links": [],
+ "modified": "2020-12-30 15:27:01.589008",
+ "modified_by": "Administrator",
+ "module": "Wadeem",
+ "name": "Session",
+ "owner": "Administrator",
+ "permissions": [],
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "track_changes": 1
+}

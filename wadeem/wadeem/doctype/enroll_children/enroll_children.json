@@ -1,0 +1,122 @@
+{
+ "actions": [],
+ "autoname": "naming_series:",
+ "creation": "2020-12-30 16:06:58.455307",
+ "doctype": "DocType",
+ "editable_grid": 1,
+ "engine": "InnoDB",
+ "field_order": [
+  "naming_series",
+  "child_id",
+  "amended_from",
+  "program_id",
+  "application_status",
+  "workshop_id",
+  "sales_order_id",
+  "sales_invoice_id",
+  "selling_price",
+  "enrollment_date"
+ ],
+ "fields": [
+  {
+   "fieldname": "naming_series",
+   "fieldtype": "Select",
+   "label": "Form ID",
+   "options": "EN-"
+  },
+  {
+   "fieldname": "child_id",
+   "fieldtype": "Link",
+   "label": "Child",
+   "options": "Children",
+   "read_only": 1
+  },
+  {
+   "fieldname": "amended_from",
+   "fieldtype": "Link",
+   "label": "Amended From",
+   "no_copy": 1,
+   "options": "Enroll Children",
+   "print_hide": 1,
+   "read_only": 1
+  },
+  {
+   "fieldname": "program_id",
+   "fieldtype": "Link",
+   "label": "Program",
+   "options": "Programs",
+   "read_only": 1
+  },
+  {
+   "fieldname": "application_status",
+   "fieldtype": "Select",
+   "label": "Application Status",
+   "options": "Enrolled\nNot Enrolled"
+  },
+  {
+   "fieldname": "workshop_id",
+   "fieldtype": "Table",
+   "label": "Workshop",
+   "options": "Enroll Workshops",
+   "read_only": 1
+  },
+  {
+   "fieldname": "sales_order_id",
+   "fieldtype": "Link",
+   "label": "Sales Order",
+   "options": "Sales Order"
+  },
+  {
+   "fieldname": "sales_invoice_id",
+   "fieldtype": "Link",
+   "label": "Sales Invoice",
+   "options": "Sales Invoice"
+  },
+  {
+   "fieldname": "selling_price",
+   "fieldtype": "Currency",
+   "label": "Price"
+  },
+  {
+   "fieldname": "enrollment_date",
+   "fieldtype": "Date",
+   "label": "Enrollment Date"
+  }
+ ],
+ "index_web_pages_for_search": 1,
+ "links": [],
+ "modified": "2021-02-10 18:32:05.471495",
+ "modified_by": "Administrator",
+ "module": "Wadeem",
+ "name": "Enroll Children",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "Guardians",
+   "share": 1,
+   "write": 1
+  },
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "Customer",
+   "share": 1,
+   "write": 1
+  }
+ ],
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "track_changes": 1
+}

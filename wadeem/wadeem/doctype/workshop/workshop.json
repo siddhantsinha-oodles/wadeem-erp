@@ -1,0 +1,133 @@
+{
+ "actions": [],
+ "autoname": "naming_series:",
+ "creation": "2021-01-22 13:27:39.936362",
+ "doctype": "DocType",
+ "editable_grid": 1,
+ "engine": "InnoDB",
+ "field_order": [
+  "naming_series",
+  "workshop_name",
+  "teacher_id",
+  "assistant_teacher",
+  "total_cost",
+  "session",
+  "start_date",
+  "end_date",
+  "image"
+ ],
+ "fields": [
+  {
+   "fieldname": "naming_series",
+   "fieldtype": "Select",
+   "label": "Workshop ID",
+   "no_copy": 1,
+   "options": "WO-",
+   "set_only_once": 1
+  },
+  {
+   "fieldname": "workshop_name",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "Workshop Name",
+   "reqd": 1
+  },
+  {
+   "fieldname": "teacher_id",
+   "fieldtype": "Link",
+   "label": "Teacher",
+   "options": "Employee"
+  },
+  {
+   "fieldname": "assistant_teacher",
+   "fieldtype": "Link",
+   "label": "Assistant Teacher",
+   "options": "Employee"
+  },
+  {
+   "fieldname": "total_cost",
+   "fieldtype": "Currency",
+   "label": "Total Cost"
+  },
+  {
+   "allow_in_quick_entry": 1,
+   "fieldname": "session",
+   "fieldtype": "Table",
+   "ignore_user_permissions": 1,
+   "label": "Session",
+   "options": "Session",
+   "reqd": 1
+  },
+  {
+   "fieldname": "start_date",
+   "fieldtype": "Date",
+   "label": "Start Date",
+   "reqd": 1
+  },
+  {
+   "fieldname": "end_date",
+   "fieldtype": "Date",
+   "label": "End Date",
+   "reqd": 1
+  },
+  {
+   "fieldname": "image",
+   "fieldtype": "Attach Image",
+   "label": "Image"
+  }
+ ],
+ "image_field": "image",
+ "index_web_pages_for_search": 1,
+ "links": [],
+ "modified": "2021-01-22 13:27:39.936362",
+ "modified_by": "Administrator",
+ "module": "Wadeem",
+ "name": "Workshop",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "System Manager",
+   "share": 1,
+   "write": 1
+  },
+  {
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "Coordinators",
+   "share": 1,
+   "write": 1
+  },
+  {
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "Guardians",
+   "share": 1
+  },
+  {
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "Teacher",
+   "share": 1
+  }
+ ],
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "title_field": "workshop_name",
+ "track_changes": 1
+}

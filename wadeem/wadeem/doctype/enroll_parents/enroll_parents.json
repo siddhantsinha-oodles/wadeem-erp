@@ -1,0 +1,84 @@
+{
+ "actions": [],
+ "autoname": "naming_series:",
+ "creation": "2021-01-14 08:50:38.862376",
+ "doctype": "DocType",
+ "editable_grid": 1,
+ "engine": "InnoDB",
+ "field_order": [
+  "naming_series",
+  "user_id",
+  "program_id",
+  "application_status",
+  "workshop_id",
+  "amended_from"
+ ],
+ "fields": [
+  {
+   "fieldname": "naming_series",
+   "fieldtype": "Select",
+   "label": "Form ID",
+   "options": "EN-"
+  },
+  {
+   "fieldname": "program_id",
+   "fieldtype": "Link",
+   "label": "Program",
+   "options": "Programs",
+   "read_only": 1
+  },
+  {
+   "fieldname": "application_status",
+   "fieldtype": "Select",
+   "label": "Application Status",
+   "options": "Enrolled\nNot Enrolled"
+  },
+  {
+   "fieldname": "workshop_id",
+   "fieldtype": "Table",
+   "label": "Workshop",
+   "options": "Enroll Workshops",
+   "read_only": 1
+  },
+  {
+   "fieldname": "amended_from",
+   "fieldtype": "Link",
+   "label": "Amended From",
+   "no_copy": 1,
+   "options": "Enroll Parents",
+   "print_hide": 1,
+   "read_only": 1
+  },
+  {
+   "fieldname": "user_id",
+   "fieldtype": "Link",
+   "label": "User",
+   "options": "User",
+   "read_only": 1
+  }
+ ],
+ "index_web_pages_for_search": 1,
+ "links": [],
+ "modified": "2021-01-29 08:30:22.326605",
+ "modified_by": "Administrator",
+ "module": "Wadeem",
+ "name": "Enroll Parents",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "System Manager",
+   "share": 1,
+   "write": 1
+  }
+ ],
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "track_changes": 1
+}

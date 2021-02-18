@@ -1,0 +1,38 @@
+{
+ "add_total_row": 1,
+ "columns": [],
+ "creation": "2021-02-10 18:15:59.735270",
+ "disable_prepared_report": 0,
+ "disabled": 0,
+ "docstatus": 0,
+ "doctype": "Report",
+ "filters": [],
+ "idx": 0,
+ "is_standard": "Yes",
+ "modified": "2021-02-11 10:27:28.517366",
+ "modified_by": "Administrator",
+ "module": "Wadeem",
+ "name": "Benefit Loss for Workshops",
+ "owner": "Administrator",
+ "prepared_report": 0,
+ "ref_doctype": "Enroll Children",
+ "report_name": "Benefit Loss for Workshops",
+ "report_type": "Script Report",
+ "roles": [
+  {
+   "role": "System Manager"
+  },
+  {
+   "role": "Administrator"
+  },
+  {
+   "role": "Dashboard Manager"
+  },
+  {
+   "role": "Customer"
+  },
+  {
+   "role": "Guardians"
+  }
+ ]
+}

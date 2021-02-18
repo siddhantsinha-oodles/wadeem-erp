@@ -1,0 +1,59 @@
+{
+ "_liked_by": "[]",
+ "cards": [
+  {
+   "hidden": 0,
+   "label": "Reports",
+   "links": "[\n    {\n    \"dependencies\": [\n            \"Sales Order\"\n        ],\n        \"doctype\": \"Sales Order\",\n        \"is_query_report\": true,\n        \"label\": \"Sales Order Trends\",\n        \"name\": \"Sales Order Trends\",\n        \"type\": \"report\"\n    },\n    {\n        \"dependencies\": [\n            \"Sales Order\"\n        ],\n        \"doctype\": \"Sales Order\",\n        \"is_query_report\": true,\n        \"label\": \"Sales Order Trends\",\n        \"name\": \"Sales Order Trends\",\n        \"type\": \"report\"\n    }\n]"
+  }
+ ],
+ "cards_label": "Reports",
+ "category": "Modules",
+ "charts": [],
+ "charts_label": "Wadeem",
+ "creation": "2020-12-03 20:06:07.443032",
+ "developer_mode_only": 0,
+ "disable_user_customization": 0,
+ "docstatus": 0,
+ "doctype": "Desk Page",
+ "extends": "Wadeem-Administrator",
+ "extends_another_page": 0,
+ "hide_custom": 1,
+ "idx": 0,
+ "is_standard": 1,
+ "label": "Wadeem",
+ "modified": "2021-02-11 10:51:44.041723",
+ "modified_by": "Administrator",
+ "module": "Wadeem",
+ "name": "Wadeem",
+ "owner": "Administrator",
+ "pin_to_bottom": 0,
+ "pin_to_top": 1,
+ "shortcuts": [
+  {
+   "doc_view": "List",
+   "label": "Children",
+   "link_to": "Children",
+   "type": "DocType"
+  },
+  {
+   "doc_view": "List",
+   "label": "Guardian",
+   "link_to": "Guardians",
+   "type": "DocType"
+  },
+  {
+   "doc_view": "List",
+   "label": "Programs",
+   "link_to": "Programs",
+   "type": "DocType"
+  },
+  {
+   "doc_view": "List",
+   "label": "Workshops",
+   "link_to": "Workshop",
+   "type": "DocType"
+  }
+ ],
+ "shortcuts_label": "Wadeem"
+}
