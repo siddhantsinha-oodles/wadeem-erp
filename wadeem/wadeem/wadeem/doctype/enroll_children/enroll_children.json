@@ -11,7 +11,11 @@
   "program_id",
   "workshop_id",
   "amended_from",
-  "application_status"
+  "application_status",
+  "selling_price",
+  "sales_order_id",
+  "sales_invoice_id",
+  "enrollment_date"
  ],
  "fields": [
   {
@@ -19,24 +23,21 @@
    "fieldtype": "Link",
    "in_list_view": 1,
    "label": "Child",
-   "options": "Children",
-   "read_only": 1
+   "options": "Children"
   },
   {
    "fieldname": "program_id",
    "fieldtype": "Link",
    "in_list_view": 1,
    "label": "Program",
-   "options": "Programs",
-   "read_only": 1
+   "options": "Programs"
   },
   {
    "allow_in_quick_entry": 1,
    "fieldname": "workshop_id",
    "fieldtype": "Table",
    "label": "Workshop",
-   "options": "Enroll Workshops",
-   "read_only": 1
+   "options": "Enroll Workshops"
   },
   {
    "fieldname": "amended_from",
@@ -51,11 +52,9 @@
    "fieldname": "naming_series",
    "fieldtype": "Select",
    "in_global_search": 1,
-   "in_list_view": 1,
    "in_standard_filter": 1,
    "label": "Form ID",
    "options": "EN-",
-   "search_index": 1,
    "set_only_once": 1
   },
   {
@@ -65,12 +64,34 @@
    "fieldtype": "Select",
    "label": "Application Status",
    "options": "Enrolled\nCompleted\nNot Enrolled"
+  },
+  {
+   "fieldname": "selling_price",
+   "fieldtype": "Data",
+   "label": "Price"
+  },
+  {
+   "fieldname": "sales_order_id",
+   "fieldtype": "Link",
+   "label": "Sales Order",
+   "options": "Sales Order"
+  },
+  {
+   "fieldname": "sales_invoice_id",
+   "fieldtype": "Link",
+   "label": "Sales Invoice",
+   "options": "Sales Invoice"
+  },
+  {
+   "fieldname": "enrollment_date",
+   "fieldtype": "Date",
+   "label": "Enrollment Date"
   }
  ],
  "index_web_pages_for_search": 1,
  "is_submittable": 1,
  "links": [],
- "modified": "2020-12-29 11:00:29.854617",
+ "modified": "2021-02-08 14:46:14.895484",
  "modified_by": "Administrator",
  "module": "Wadeem",
  "name": "Enroll Children",
@@ -85,6 +106,18 @@
    "read": 1,
    "report": 1,
    "role": "System Manager",
+   "share": 1,
+   "write": 1
+  },
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "Guardians",
    "share": 1,
    "write": 1
   }

@@ -1,104 +1,143 @@
 <div class="content-slider-wrapper">
     <div class="event-slider">
-                     <div class="">
-                        <div class="columns">
-                           <!-- column -->
-                           <div class="column">
-                              <figure style="border-radius: 35px; overflow: hidden; ">
-                <img src="{{ doc.image }}" alt="No Image">
-                              </figure>
-                           </div>
-                        </div>
-                     </div>
-                  </div>
+            <div class="columns">
+                <div class="column">
+                    <figure style="border-radius: 35px; overflow: hidden; ">
+                        <img style="width:100%;" src="{{ doc.image }}" alt="No Image">
+                    </figure>
+                </div>
+            </div>
+    </div>
 
-    <div class="right-slider-text right-contact-form has-text-left">
-                   <h2 class="has-text-right fs-32" style="text-transform:capitalize;">{{ doc.program_name }}</h2>
-                   <div class="has-text-right">
-<!--                     <div class="workshop-price price-block">-->
-<!--                        <span>3000 SAR <strong class="dollar" style="background:none">-->
-<!--                           <img src="assets/images/clock_vector.svg" alt="clock"></strong></span>-->
-<!--                        <span>3000 SAR <strong class="dollar" style="background:none"><img src="assets/images/dollar_vector.svg" alt="clock"></strong></span>-->
-<!--                     </div>-->
-<!--                     <h2 class="kids-heading">تشمل الورشة:</h2>-->
-<!--                     <p class="kids-para">اشتراك الطفل بفصول افتراضية والتفاعل مع المدربة والأصدقاء صندوق أدوات: يحتوي على الأدوات التي يحتاجها الطفل للقيام بالأنشطة الخاصة بالورشة. </p>-->
 
-                     <h2 class="kids-heading">Program Includes</h2>
-                     <div class="workship-menu educator-price kids-menu">
-                        <div class="kids-para custom-text-right">{{ doc.program_includes }}</div>
+    <div class="right-slider-text parent-educator right-contact-form has-text-left">
+        <div class="text-right" style="margin-bottom:30px;" >
+        <a class="programs-link" style="color:#1b335f" href="">
+            الرجوع إلى قائمة البرامج
+        </a>
+    </div>
+        <h2 class="has-text-right fs-32" style="text-transform:capitalize;">{{ doc.program_name }}</h2>
+        <div class="has-text-right">
+                <div class="workshop-price educator-price price-block">
+                        <span>{{ doc.duration }} <strong class="dollar">SR</strong></span>
+                        <span>{{ doc.selling_price }} <strong class="dollar">SR</strong></span>
                      </div>
-                       <h2 class="kids-heading">Program Topics</h2>
-                     <div class="workship-menu educator-price kids-menu">
-                        <div class="kids-para custom-text-right">{{ doc.program_topics }}</div>
-                     </div>
-                    </div>
-         <div class="row-element flex-wrap" style="margin:0 -15px;">
-             <label class="d-block w-100"> Select a child: </label>
-                        <div class="contacts-inputs-common">
-                            {% set children = frappe.get_all('Children', filters={'owner': frappe.session.user}, fields=['full_name','name']) %}
-                        <div class="custom-select" style="border:none; background:none;">
-                           <select name="children" id="children" data-fieldtype="Select">
-                             {% for child in children %}
-                                <option value="{{ child.name }}">{{ child.full_name }}</option>
-                            {% endfor %}
-                           </select>
-                         </div>
-                      </div>
-                      </div>
-                   <div class=" bordered-payments" style="display: block; width:auto; margin-top:30px;">
-               <div>
-                    <p class="text-right">Workshop Date Select</p>
-                    {% for workshop in doc.workshop_id %}
-                    {% set workshop_doc = workshop.get_records(workshop.workshop_id) %}
-                    {% set program_name = doc.program_name %}
+            <h2 class="kids-heading">تشمل ال:ورشة</h2>
+            <div class="workship-menu educator-price kids-menu">
+                <div class="kids-para custom-text-right"> {{ doc.program_includes }}</div>
+            </div>
+            <h2 class="kids-heading include-heading">مواضيع الورشة</h2>
+            <div class="workship-menu educator-price kids-menu">
+                <div class="kids-para custom-text-right">{{ doc.program_topics }}</div>
+            </div>
+        </div>
+                {% if frappe.session.user %}
+                {% set user = frappe.session.user %}
+                {% endif %}
+                <input id="user" type="hidden" value="{{ user }}">
+                <input id="type" type="hidden" value="{{ doc.type }}">
+                <input id="program" type="hidden" value="{{ doc.name }}">
+                <input id="selling_price" type="hidden" value="{{ doc.selling_price }}">
+        {% if doc.type == 'Children' %}
+        <div class="row-element flex-wrap" style="margin:0 -15px;">
+            <label class="d-block w-100"> حدد الطفل: </label>
+            <div class="contacts-inputs-common">
+                {% set children = frappe.get_all('Children', filters={'owner': frappe.session.user},
+                fields=['full_name','name']) %}
 
-                  <label for="{{ workshop_doc.name }}" class="label-radios pay-radios">{{ workshop_doc.start_date}} - {{ workshop_doc.end_date}}
-                  <input type="radio" name="radio" id="{{ workshop_doc.name }}" value="{{ workshop_doc.name }}">
-                  <span class="checkmark"></span>
+                <div class="custom-select" style="border:none; background:none;">
+                    <select name="children" id="children" data-fieldtype="Select">
+                        {% if children|length == 0 %}
+                            <option value="">No child created</option>
+                        {% endif %}
+                        {% for i in children %}
+                            <option value="{{ i.name }}">{{ i.full_name }}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+            </div>
+            <div class="container">
+                <p class="d-inline-block text-right mr-3">To add a new child</p><a class="mylink d-inline-block text-right" href="">click here</a>
+            </div>
+        </div>
+        {% endif %}
+        <div class=" bordered-payments" style="display: block; width:auto; margin-top:30px;">
+            <div>
+                <p class="text-right">Workshop Date Select</p>
+                {% for workshop in doc.workshop_id %}
+                {% set workshop_doc = workshop.get_records(workshop.workshop_id) %}
+                {% set program_name = doc.program_name %}
+
+                <label for="{{ workshop_doc.name }}" class="label-radios pay-radios">{{ workshop_doc.start_date}} - {{
+                    workshop_doc.end_date}}
+                    <input class="workspace_name" type="radio" name="radio" id="{{ workshop_doc.name }}" value="{{ workshop_doc.name }}">
+                    <span class="checkmark"></span>
                 </label>
-                   {% endfor %}
-               </div>
+                {% endfor %}
 
             </div>
-                  <form class="check-form">
-                       <div class="general-btn">
-                          <button id="enroll_child" class="btn red-btn pink-btn">Purchase</button>
-                           <a href="checkout-form.html" class="btn red-btn ">تابع لإتمام الدفع</a>
-                        </div>
-                  </form>
-                  </div>
+
+        </div>
+        <form class="check-form">
+            <div class="general-btn">
+                <button onclick="onClickPurchase()" id="enroll_child" class="btn red-btn pink-btn" type="button">Purchase</button>
+            </div>
+        </form>
+    </div>
 </div>
 
 {% block script %}
 
-    <script>
-	frappe.ready(() => {
-		$('#enroll_child').click((event) => {
-		    debugger
-			const $btn = $(event.target);
-            const $btn_ = $("#children").val();
+<script>
+    frappe.ready (() => {
+        $( ".website-list" ).addClass( "container" );
+        $( ".breadcrumb-menu" ).addClass( "container" );
+    })
+</script>
+
+<script>
+frappe.ready(() => {
+              let path = window.location.origin + '/' + 'my-children';
+               $("a.mylink").attr("href", path);
+               let programs_path = window.location.origin + '/' + 'programs';
+               $("a.programs-link").attr("href", programs_path);
+        });
+</script>
+<script>
+function onClickPurchase(event) {
              const selected_workspaces = [];
+    //Getting Workhop name
     const list = $(".workspace_name");
     for (let index = 0; index < list.length; index++) {
+        console.log("in loop")
       const element = list[index];
+
       if(element["checked"]) {
         selected_workspaces.push(element["id"]);
       }
     }
-
-    console.log(selected_workspaces);
+    //Creating params for create function
     const query_params = {
-       program:  $("#title").data('value'),
-      children: $("#children").val(),
+       program:  $("#program").val(),
+       selling_price:  $("#selling_price").val(),
       selected_workspaces
-
     };
+    //
+    switch($("#type").val()) {
+    case "Children":
+        query_params["children"] = $("#children").val();
+        break;
+    case "Parents":
+    case "Educators":
+        query_params["user"] = $("#user").val();
+        break;
+    }
     let path = window.location.pathname + '?' + frappe.utils.get_url_from_dict(query_params);
-    frappe.call({
+    if ($("#type").val() == 'Children') {
+        frappe.call({
         method: 'wadeem.wadeem.doctype.enroll_children.enroll_children.create_form',
         args: query_params
         }).then(res => {
-            console.log(res.message.name)
             let success_dialog = new frappe.ui.Dialog({
 				title: __('Success'),
 				secondary_action: function() {
@@ -110,16 +149,53 @@
 			success_dialog.show();
 			const origin = window.location.origin
 			const redirect_path = origin + '/' + 'enroll' + '?name=' + res.message.name
-			console.log(redirect_path)
+			const redirect_path_2 = origin + '/' + 'orders'
+            window.location.replace(redirect_path_2);
+       })
+    }
+    else if ($("#type").val() == 'Parents') {
+        frappe.call({
+        method: 'wadeem.wadeem.doctype.enroll_parents.enroll_parents.create_form',
+        args: query_params
+        }).then(res => {
+            let success_dialog = new frappe.ui.Dialog({
+				title: __('Success'),
+				secondary_action: function() {
+					window.location.reload()
+				}
+			})
+			success_dialog.set_message(__('Do not refresh. Please complete the payment on the next page'));
+			success_dialog.$message.show()
+			success_dialog.show();
+			const origin = window.location.origin
+			const redirect_path = origin + '/' + 'enroll-parents' + '?name=' + res.message.name
             window.location.replace(redirect_path);
        })
-		});
-	});
-
-    </script>
+    }
+    else if ($("#type").val() == 'Educators') {
+        frappe.call({
+        method: 'wadeem.wadeem.doctype.enroll_parents.enroll_parents.create_form',
+        args: query_params
+        }).then(res => {
+            let success_dialog = new frappe.ui.Dialog({
+            title: __('Success'),
+            secondary_action: function() {
+               window.location.reload()
+            }
+         })
+         success_dialog.set_message(__('Do not refresh. Please complete the payment on the next page'));
+         success_dialog.$message.show()
+         success_dialog.show();
+         const origin = window.location.origin
+         const redirect_path = origin + '/' + 'enroll-parents' + '?name=' + res.message.name
+            window.location.replace(redirect_path);
+       })
+    }
+	}
+</script>
 <script>
-	$(document).ready(function() {
-  $("body").click(function() {
+frappe.ready(() => {
+    $("body").click(function() {
     $(".click-user").removeClass("active-header");
 
 });
@@ -146,9 +222,10 @@ $(window).on("scroll", function() {
   }
 });
 });
+
 </script>
 
-   <script>
+<script>
 var x, i, j, l, ll, selElmnt, a, b, c;
 /*look for any elements with the class "custom-select":*/
 x = document.getElementsByClassName("custom-select");
@@ -225,11 +302,12 @@ function closeAllSelect(elmnt) {
   }
 }
 document.addEventListener("click", closeAllSelect);
+
 </script>
 {% endblock %}
 
 {% block style %}
- <style>
+<style>
         .sidebar-column.col-sm-2{
     display:none;
 }
@@ -1607,16 +1685,16 @@ footer p{
 	margin-bottom: 20px
 }
 
-.workship-menu li {
+.workship-menu li, .workship-menu p {
 	position: relative;
 	padding-right: 24px;
-	color: #5F708F;
+	color: #5F708F !important;
 	font-size: 16px;
 	margin-bottom: 12px;
 	line-height: 1.3;
 }
 
-.workship-menu li:after {
+.workship-menu li:after, .workship-menu p:after {
 	position: absolute;
 	content: '';
 	width: 10px;
@@ -1627,7 +1705,7 @@ footer p{
 	background: #5F708F;
 }
 
-.workship-menu.kids-menu li:after {
+.workship-menu.kids-menu li:after, .workship-menu.kids-menu p:after {
 	top: 10px;
 	width: 10px;
 	height: 1px;
@@ -1679,9 +1757,10 @@ footer p{
 	margin-right: 0 !important;
 }
 
-.workshop-price .dollar {
+workshop-price .dollar {
 	background: #24CBEA;
 	width: 20px;
+	font-size:10px !important;
 	height: 20px;
 	border-radius: 50%;
 	display: inline-flex;
@@ -1690,7 +1769,7 @@ footer p{
 	color: #fff;
 	margin-bottom: 0 !important
 }
-
+.
 .one-day-wrapper figure .strip-month {
 	position: absolute;
 	right: -10px;
@@ -1744,7 +1823,7 @@ footer p{
 	border-radius: 32px;
 	border-radius: 16px;
 	max-width: 1056px !important;
-	margin: 40px 0 20px auto !important;
+	margin: 10px 0 20px auto !important;
 }
 
 .active-header {
@@ -2018,6 +2097,20 @@ display:none;
 .result {
     border-bottom: none;
 }
+
+.margin-common-top {
+margin-top:150px;
+}
+.kids-para .ql-ui{
+display:none;
+}
+.include-heading {
+    margin-top:30px;
+}
+.page-breadcrumbs{
+    display:none;
+}
+
 @media only screen and (min-width: 575px) {
   .check-out-tabbing li {
     margin-bottom: 0;
@@ -2069,7 +2162,6 @@ display:none;
   .content-slider-wrapper {
     display: flex;
     justify-content: space-between;
-    align-items: center;
   }
 
   .event-slider {
@@ -2335,6 +2427,7 @@ margin-bottom:20px !important;
     right: 14%;
     top: 44%;
 }
+
  }
 @media only screen and (min-width: 1024px) {
   .navbar .is-fixed-top {
@@ -2854,15 +2947,15 @@ bottom:100%;
     margin-bottom: 24px;
   }
 
-  .workship-menu li {
+  .workship-menu li, .workship-menu p {
     margin-bottom: 24px;
     font-size: 20px;
     line-height: 36px;
     padding-right: 30px;
   }
 
-  .workship-menu li:after {
-    top: 13px;
+  .workship-menu li:after, .workship-menu p:after {
+    top: 13px !important;
   }
 
   .our-workshop-heading {
@@ -2935,16 +3028,16 @@ bottom:100%;
   }
 
   .kids-para,
-  .kids-menu li {
+  .kids-menu li,.kids-menu p {
     font-size: 18px !important;
     margin-top: 20px;
   }
 
-  .kids-menu li {
+  .kids-menu li, .kids-menu p {
     margin-bottom: 0;
   }
 
-  .workship-menu.kids-menu li:after {
+  .workship-menu.kids-menu li:after, .workship-menu.kids-menu p:after {
     top: 18px;
   }
 
@@ -3084,9 +3177,13 @@ bottom:100%;
   .btn-padding{
 margin-bottom:30px !important;
 }
+
+.include-heading {
+    margin-top:45px;
+}
 }
 
-    </style>
-{% endblock %}
 
+</style>
+{% endblock %}
 

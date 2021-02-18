@@ -8,7 +8,7 @@
  "allow_print": 0,
  "amount": 0.0,
  "amount_based_on_field": 0,
- "apply_document_permissions": 0,
+ "apply_document_permissions": 1,
  "button_label": "Save",
  "creation": "2020-12-23 16:05:12.047491",
  "currency": "SAR",
@@ -19,7 +19,7 @@
  "is_standard": 1,
  "login_required": 1,
  "max_attachment_size": 0,
- "modified": "2020-12-28 10:02:20.637154",
+ "modified": "2021-01-22 18:49:59.242595",
  "modified_by": "Administrator",
  "module": "Wadeem",
  "name": "my-children",
@@ -30,7 +30,7 @@
  "route_to_success_link": 0,
  "show_attachments": 0,
  "show_in_grid": 1,
- "show_sidebar": 1,
+ "show_sidebar": 0,
  "sidebar_items": [
   {
    "enabled": 1,

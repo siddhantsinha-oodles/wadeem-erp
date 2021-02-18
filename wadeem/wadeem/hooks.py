@@ -11,12 +11,32 @@ app_color = "blue"
 app_email = "siddhant.sinha@oodlestechnologies.com"
 app_license = "MIT"
 
-on_session_creation = [
-	"wadeem.wadeem.wadeem.utils.create_guardian"
-]
+# on_session_creation = [
+# 	"wadeem.utils.create_guardian"
+# ]
+
+doc_events = {
+	'User': {
+		"after_insert": "wadeem.utils.create_guardian"
+	},
+	'Workshop': {
+		"after_insert": "wadeem.utils.create_item"
+	},
+	"Guardians": {
+		"after_insert": "wadeem.utils.create_guardian"
+	},
+	"Children": {
+		"after_insert": "wadeem.utils.create_link"
+	}
+}
+
 website_route_rules = [
 	{"from_route": "/programs/<program_name>", "to_route": "Programs"}
 ]
+default_roles = [
+	{'role': 'Customer', 'doctype':'Customer', 'email_field': 'email_id'}
+]
+
 
 # Includes in <head>
 # ------------------
@@ -86,11 +106,7 @@ website_generators = ["Programs"]
 # ---------------
 # Hook on document methods and events
 
-doc_events = {
-	'User': {
-		"after_insert": "wadeem.create_guardian.create_guardian"
-	}
-}
+
 
 # Scheduled Tasks
 # ---------------

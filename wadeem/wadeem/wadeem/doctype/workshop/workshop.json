@@ -1,51 +1,86 @@
 {
  "actions": [],
  "autoname": "naming_series:",
- "creation": "2020-12-22 18:33:47.809169",
+ "creation": "2021-01-15 07:43:19.531749",
  "doctype": "DocType",
  "editable_grid": 1,
  "engine": "InnoDB",
  "field_order": [
   "naming_series",
   "workshop_name",
-  "teacher",
+  "teacher_id",
+  "total_cost",
+  "session_id",
+  "assistant_teacher",
   "start_date",
-  "end_date"
+  "end_date",
+  "image",
+  "max_seats"
  ],
  "fields": [
   {
-   "fieldname": "naming_series",
-   "fieldtype": "Select",
-   "label": "Workshop ID",
-   "no_copy": 1,
-   "options": "WO-",
-   "set_only_once": 1
-  },
-  {
    "fieldname": "workshop_name",
    "fieldtype": "Data",
-   "label": "Workshop Name"
+   "in_list_view": 1,
+   "label": "Workshop Name",
+   "reqd": 1
+  },
+  {
+   "fieldname": "teacher_id",
+   "fieldtype": "Link",
+   "label": "Teacher",
+   "options": "Employee"
+  },
+  {
+   "fieldname": "total_cost",
+   "fieldtype": "Currency",
+   "label": "Total Cost"
+  },
+  {
+   "fieldname": "assistant_teacher",
+   "fieldtype": "Link",
+   "label": "Assistant Teacher",
+   "options": "Employee"
   },
   {
    "fieldname": "start_date",
    "fieldtype": "Date",
+   "in_list_view": 1,
    "label": "Start Date"
   },
   {
    "fieldname": "end_date",
    "fieldtype": "Date",
+   "in_list_view": 1,
    "label": "End Date"
   },
   {
-   "fieldname": "teacher",
-   "fieldtype": "Link",
-   "label": "Teacher",
-   "options": "Teacher"
+   "fieldname": "image",
+   "fieldtype": "Attach Image",
+   "label": "Image"
+  },
+  {
+   "fieldname": "session_id",
+   "fieldtype": "Table",
+   "label": "Session",
+   "options": "Workshop_session"
+  },
+  {
+   "fieldname": "naming_series",
+   "fieldtype": "Select",
+   "label": "Workshpo ID",
+   "options": "WO-",
+   "set_only_once": 1
+  },
+  {
+   "fieldname": "max_seats",
+   "fieldtype": "Int",
+   "label": "Max Seats"
   }
  ],
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2020-12-23 10:54:43.737161",
+ "modified": "2021-02-02 12:07:55.449192",
  "modified_by": "Administrator",
  "module": "Wadeem",
  "name": "Workshop",

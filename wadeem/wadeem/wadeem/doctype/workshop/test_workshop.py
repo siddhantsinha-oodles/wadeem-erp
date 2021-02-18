@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-# Copyright (c) 2020, Siddhant and Contributors
+# Copyright (c) 2021, Siddhant and Contributors
 # See license.txt
 from __future__ import unicode_literals
 
